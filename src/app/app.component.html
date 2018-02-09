@@ -1,0 +1,17 @@
+<div class="topnav" id="myTopnav">
+  <a href="javascript:void(0);">Angular Modal</a>
+  <a href="javascript:void(0);" class="icon" (click)="responsiveMenu()">&#9776;</a>
+</div>
+
+<div class="sidenav">
+  <a href="javascript:void(0);" (click)="state='basic-demo'" [ngClass]="{'active': state === 'basic-demo'}">
+    Basic demo</a>
+  <a href="javascript:void(0);" (click)="state='nested-modal-demo'"
+     [ngClass]="{'active': state === 'nested-modal-demo'}">
+    Nested modals demo</a>
+</div>
+
+<div class="main">
+  <app-modal-demo *ngIf="state === 'basic-demo'"></app-modal-demo>
+  <app-nested-modal-demo *ngIf="state === 'nested-modal-demo'"></app-nested-modal-demo>
+</div>
