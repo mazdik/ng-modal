@@ -25,7 +25,7 @@ import {Component} from '@angular/core';
             <app-modal-demo [zIndex]="zIndex+4"></app-modal-demo>
           </ng-container>
           <ng-container class="app-modal-footer">
-            <button type="button" class="button button3" (click)="childModal.hide()">Delete</button>
+            <button type="button" class="button button3" (click)="childModal.hide()">Delete</button>&nbsp;
             <button type="button" class="button button1" (click)="childModal.hide()">Save</button>
             <button type="button" class="button button2" style="float: right;" (click)="childModal.hide()">Close
             </button>
@@ -34,7 +34,7 @@ import {Component} from '@angular/core';
 
       </ng-container>
       <ng-container class="app-modal-footer">
-        <button type="button" class="button button3" (click)="modalRoot.hide()">Delete</button>
+        <button type="button" class="button button3" (click)="modalRoot.hide()">Delete</button>&nbsp;
         <button type="button" class="button button1" (click)="modalRoot.hide()">Save</button>
         <button type="button" class="button button2" style="float: right;" (click)="modalRoot.hide()">Close</button>
       </ng-container>
