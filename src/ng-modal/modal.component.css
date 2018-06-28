@@ -25,6 +25,7 @@
   padding: 2px 16px;
   background-color: #5b9bd5;
   color: white;
+  user-select: none;
 }
 
 .ui-modal-body {
@@ -44,17 +45,9 @@
 }
 
 .ui-close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.ui-close:hover,
-.ui-close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .dragging {
@@ -96,4 +89,28 @@
   width: 100%;
   bottom: -5px;
   left: 0;
+}
+
+.button {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 2px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  outline: 0;
+}
+
+.icon {
+  position: relative;
+  display: inline-block;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.icon-remove:before {
+  content: "\2716";
 }

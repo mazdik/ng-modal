@@ -1,5 +1,5 @@
 import {
-  Component, ElementRef, ViewChild, Input, Output, OnInit, AfterViewChecked,
+  Component, ElementRef, ViewChild, Input, Output, OnInit, AfterViewChecked, NgZone,
   HostListener, HostBinding, EventEmitter
 } from '@angular/core';
 
@@ -33,7 +33,7 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   lastPageX: number;
   lastPageY: number;
 
-  constructor(private element: ElementRef) {
+  constructor(private element: ElementRef, private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -50,10 +50,18 @@ export class ModalComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  @HostListener('window:resize')
-  onWindowResize(): void {
-    this.executePostDisplayActions = true;
-    this.center();
+  addEventListeners() {
+    this.ngZone.runOutsideAngular(() => {
+      window.document.addEventListener('mousemove', this.onMousemove.bind(this));
+      window.document.addEventListener('mouseup', this.onMouseup.bind(this));
+      window.addEventListener('resize', this.onWindowResize.bind(this));
+    });
+  }
+
+  removeEventListener() {
+    window.document.removeEventListener('mousemove', this.onMousemove.bind(this));
+    window.document.removeEventListener('mouseup', this.onMouseup.bind(this));
+    window.removeEventListener('resize', this.onWindowResize.bind(this));
   }
 
   @HostListener('keydown.esc', ['$event'])
@@ -63,13 +71,16 @@ export class ModalComponent implements OnInit, AfterViewChecked {
     this.hide();
   }
 
-  @HostListener('mousemove', ['$event'])
+  onWindowResize(): void {
+    this.executePostDisplayActions = true;
+    this.center();
+  }
+
   onMousemove(event): void {
     this.onDrag(event);
     this.onResize(event);
   }
 
-  @HostListener('mouseup', ['$event'])
   onMouseup(event): void {
     this.endDrag(event);
     this.endResize(event);
@@ -84,12 +95,14 @@ export class ModalComponent implements OnInit, AfterViewChecked {
         this.modalBody.nativeElement.scrollTop = 0;
       }
     }, 1);
+    this.addEventListeners();
   }
 
   public hide(): void {
     this.visible = false;
     this.close.emit(true);
     this.focusLastModal();
+    this.removeEventListener();
   }
 
   get contentzIndex(): number {
@@ -230,6 +243,10 @@ export class ModalComponent implements OnInit, AfterViewChecked {
     while ((el = el.parentElement) && !el.classList.contains(cls)) {
     }
     return el;
+  }
+
+  onIconMouseDown(event: Event) {
+    event.stopPropagation();
   }
 
 }
