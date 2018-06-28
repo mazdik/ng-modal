@@ -8,6 +8,7 @@ import {Component, Input} from '@angular/core';
                [modalTitle]="'Demo modal'"
                [width]="500"
                [zIndex]="zIndex"
+               [maximizable]="true"
                (close)="onCloseModal()">
       <ng-container class="app-modal-body">
         <h3>MODAL DIALOG</h3>

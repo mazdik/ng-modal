@@ -14,13 +14,16 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   @Input() public width: any;
   @Input() public zIndex: number;
   @Input() public minWidth: number = 260;
-  @Input() public minHeight: number = 260;
+  @Input() public minHeight: number = 200;
   @Input() public scrollTop: boolean = true;
+  @Input() maximizable: boolean;
 
   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
   @ViewChild('modalRoot') modalRoot: ElementRef;
   @ViewChild('modalBody') modalBody: ElementRef;
+  @ViewChild('modalHeader') modalHeader: ElementRef;
+  @ViewChild('modalFooter') modalFooter: ElementRef;
 
   @HostBinding('class') cssClass = 'app-modal';
 
@@ -32,6 +35,12 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   resizingSE: boolean;
   lastPageX: number;
   lastPageY: number;
+  maximized: boolean;
+  preMaximizeRootWidth: number;
+  preMaximizeRootHeight: number;
+  preMaximizeBodyHeight: number;
+  preMaximizePageX: number;
+  preMaximizePageY: number;
 
   constructor(private element: ElementRef, private ngZone: NgZone) {
   }
@@ -130,10 +139,12 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   }
 
   initDrag(event: MouseEvent) {
-    this.dragging = true;
-    this.lastPageX = event.pageX;
-    this.lastPageY = event.pageY;
-    this.modalRoot.nativeElement.classList.add('dragging');
+    if (!this.maximized) {
+      this.dragging = true;
+      this.lastPageX = event.pageX;
+      this.lastPageY = event.pageY;
+      this.modalRoot.nativeElement.classList.add('dragging');
+    }
   }
 
   onDrag(event: MouseEvent) {
@@ -248,5 +259,42 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   onIconMouseDown(event: Event) {
     event.stopPropagation();
   }
+
+  toggleMaximize(event) {
+    if (this.maximized) {
+      this.revertMaximize();
+    } else {
+      this.maximize();
+    }
+    event.preventDefault();
+  }
+
+  maximize() {
+    this.preMaximizePageX = parseFloat(this.modalRoot.nativeElement.style.top);
+    this.preMaximizePageY = parseFloat(this.modalRoot.nativeElement.style.left);
+    this.preMaximizeRootWidth = this.modalRoot.nativeElement.offsetWidth;
+    this.preMaximizeRootHeight = this.modalRoot.nativeElement.offsetHeight;
+    this.preMaximizeBodyHeight = this.modalBody.nativeElement.offsetHeight;
+
+    this.modalRoot.nativeElement.style.top = '0px';
+    this.modalRoot.nativeElement.style.left = '0px';
+    this.modalRoot.nativeElement.style.width = '100vw';
+    this.modalRoot.nativeElement.style.height = '100vh';
+    const diffHeight = this.modalHeader.nativeElement.offsetHeight + this.modalFooter.nativeElement.offsetHeight;
+    this.modalBody.nativeElement.style.height = 'calc(100vh - ' + diffHeight + 'px)';
+    this.modalBody.nativeElement.style.maxHeight = 'none';
+
+    this.maximized = true;
+}
+
+revertMaximize() {
+    this.modalRoot.nativeElement.style.top = this.preMaximizePageX + 'px';
+    this.modalRoot.nativeElement.style.left = this.preMaximizePageY + 'px';
+    this.modalRoot.nativeElement.style.width = this.preMaximizeRootWidth + 'px';
+    this.modalRoot.nativeElement.style.height = this.preMaximizeRootHeight + 'px';
+    this.modalBody.nativeElement.style.height = this.preMaximizeBodyHeight + 'px';
+
+    this.maximized = false;
+}
 
 }

@@ -26,6 +26,10 @@
   background-color: #5b9bd5;
   color: white;
   user-select: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .ui-modal-body {
@@ -40,14 +44,30 @@
   color: white;
 }
 
+.ui-titlebar {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%;
+  overflow: hidden;
+}
+
 .ui-modal-title {
   font-size: 18px;
 }
 
-.ui-close {
-  position: absolute;
-  top: 0;
-  right: 0;
+.ui-controlbar {
+  display: flex;
+  align-items: center;
+}
+
+.ui-icon {
+  cursor: pointer;
+  padding-top: 9px;
+}
+
+.ui-icon:hover {
+  opacity: 0.75;
 }
 
 .dragging {
@@ -89,28 +109,4 @@
   width: 100%;
   bottom: -5px;
   left: 0;
-}
-
-.button {
-  background-color: #f44336;
-  border: none;
-  color: white;
-  padding: 2px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  user-select: none;
-  outline: 0;
-}
-
-.icon {
-  position: relative;
-  display: inline-block;
-  font-style: normal;
-  font-weight: bold;
-}
-
-.icon-remove:before {
-  content: "\2716";
 }
