@@ -37,3 +37,16 @@ export class ModalDemoComponent {
 
 }
 ```
+
+### Properties
+
+| Attribute        | Type       | Default | Description |
+|------------------|------------|---------|-------------|
+| modalTitle       | string     | null    |             |
+| width            | any        | null    |             |
+| zIndex           | number     | null    |             |
+| minWidth         | number     | 260     |             |
+| minHeight        | number     | 200     |             |
+| scrollTop        | boolean    | true    |             |
+| maximizable      | boolean    | false   |             |
+| backdrop         | boolean    | true    |             |

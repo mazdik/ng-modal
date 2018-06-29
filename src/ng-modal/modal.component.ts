@@ -16,7 +16,8 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   @Input() public minWidth: number = 260;
   @Input() public minHeight: number = 200;
   @Input() public scrollTop: boolean = true;
-  @Input() maximizable: boolean;
+  @Input() public maximizable: boolean;
+  @Input() public backdrop: boolean = true;
 
   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
