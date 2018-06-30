@@ -18,6 +18,7 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   @Input() public scrollTop: boolean = true;
   @Input() public maximizable: boolean;
   @Input() public backdrop: boolean = true;
+  @Input() public styleClass: string;
 
   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
@@ -26,9 +27,17 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   @ViewChild('modalHeader') modalHeader: ElementRef;
   @ViewChild('modalFooter') modalFooter: ElementRef;
 
-  @HostBinding('class') cssClass = 'app-modal';
+  @HostBinding('class')
+  get cssClass(): string {
+    let cls = 'app-modal';
+    if (this.styleClass) {
+      cls += ' ' + this.styleClass;
+    }
+    return cls;
+  }
 
   visible: boolean;
+  contentzIndex: number;
   executePostDisplayActions: boolean;
   dragging: boolean;
   resizingS: boolean;
@@ -48,9 +57,10 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     if (!this.zIndex) {
-      this.zIndex = this.getMaxModalIndex() + 2;
+      this.zIndex = this.getMaxModalIndex() + 1;
       this.zIndex = this.zIndex || 1100;
     }
+    this.contentzIndex = this.zIndex + 1;
   }
 
   ngAfterViewChecked() {
@@ -113,10 +123,6 @@ export class ModalComponent implements OnInit, AfterViewChecked {
     this.close.emit(true);
     this.focusLastModal();
     this.removeEventListener();
-  }
-
-  get contentzIndex(): number {
-    return this.zIndex + 1;
   }
 
   center() {
@@ -234,7 +240,7 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
   getMaxModalIndex() {
     let zIndex = 0;
-    const modals = document.querySelectorAll('.ui-modal-overlay');
+    const modals = document.querySelectorAll('.ui-modal');
     [].forEach.call(modals, function (modal) {
       const indexCurrent = parseInt(modal.style.zIndex, 10);
       if (indexCurrent > zIndex) {
@@ -286,16 +292,25 @@ export class ModalComponent implements OnInit, AfterViewChecked {
     this.modalBody.nativeElement.style.maxHeight = 'none';
 
     this.maximized = true;
-}
+  }
 
-revertMaximize() {
-    this.modalRoot.nativeElement.style.top = this.preMaximizePageX + 'px';
-    this.modalRoot.nativeElement.style.left = this.preMaximizePageY + 'px';
-    this.modalRoot.nativeElement.style.width = this.preMaximizeRootWidth + 'px';
-    this.modalRoot.nativeElement.style.height = this.preMaximizeRootHeight + 'px';
-    this.modalBody.nativeElement.style.height = this.preMaximizeBodyHeight + 'px';
+  revertMaximize() {
+      this.modalRoot.nativeElement.style.top = this.preMaximizePageX + 'px';
+      this.modalRoot.nativeElement.style.left = this.preMaximizePageY + 'px';
+      this.modalRoot.nativeElement.style.width = this.preMaximizeRootWidth + 'px';
+      this.modalRoot.nativeElement.style.height = this.preMaximizeRootHeight + 'px';
+      this.modalBody.nativeElement.style.height = this.preMaximizeBodyHeight + 'px';
 
-    this.maximized = false;
-}
+      this.maximized = false;
+  }
+
+  moveOnTop() {
+    if (!this.backdrop) {
+      const zIndex = this.getMaxModalIndex();
+      if (this.contentzIndex <= zIndex) {
+        this.contentzIndex = zIndex + 1;
+      }
+    }
+  }
 
 }

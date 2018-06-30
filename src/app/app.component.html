@@ -9,9 +9,13 @@
   <a href="javascript:void(0);" (click)="state='nested-modal-demo'"
      [ngClass]="{'active': state === 'nested-modal-demo'}">
     Nested modals demo</a>
+    <a href="javascript:void(0);" (click)="state='panel-demo'"
+    [ngClass]="{'active': state === 'panel-demo'}">
+   Panels demo</a>
 </div>
 
 <div class="main">
   <app-modal-demo *ngIf="state === 'basic-demo'"></app-modal-demo>
   <app-nested-modal-demo *ngIf="state === 'nested-modal-demo'"></app-nested-modal-demo>
+  <app-panel-demo *ngIf="state === 'panel-demo'"></app-panel-demo>
 </div>

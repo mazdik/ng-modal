@@ -16,8 +16,8 @@ import {Component, Input} from '@angular/core';
           Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.</p>
       </ng-container>
       <ng-container class="app-modal-footer">
-        <button type="button" class="button button3" (click)="modalRoot.hide()">Delete</button>&nbsp;
-        <button type="button" class="button button1" (click)="modalRoot.hide()">Save</button>
+        <button type="button" class="button button3">Delete</button>&nbsp;
+        <button type="button" class="button button1">Save</button>
         <button type="button" class="button button2" style="float: right;" (click)="modalRoot.hide()">Close</button>
       </ng-container>
     </app-modal>

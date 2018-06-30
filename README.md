@@ -50,3 +50,4 @@ export class ModalDemoComponent {
 | scrollTop        | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |
+| styleClass       | string     | null    |             |

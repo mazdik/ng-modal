@@ -8,7 +8,8 @@
      [ngStyle]="{'display': visible ? 'block' : 'none'}"
      [style.width.px]="width"
      [style.minWidth.px]="minWidth"
-     [style.zIndex]="contentzIndex">
+     [style.zIndex]="contentzIndex"
+     (mousedown)="moveOnTop()">
     <div class="ui-modal-header" #modalHeader
          (mousedown)="initDrag($event)">
       <div class="ui-titlebar">
