@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "new-mer": {
+    "ng-modal": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "new-mer:build"
+            "browserTarget": "ng-modal:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "new-mer:build:production"
+              "browserTarget": "ng-modal:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "new-mer:build"
+            "browserTarget": "ng-modal:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "new-mer-e2e": {
+    "ng-modal-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,7 +103,12 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "new-mer:serve"
+            "devServerTarget": "ng-modal:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-modal:serve:production"
+            }
           }
         },
         "lint": {
@@ -118,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "new-mer"
+  "defaultProject": "ng-modal"
 }

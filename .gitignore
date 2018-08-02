@@ -2,7 +2,6 @@
 
 # compiled output
 /dist
-/dist-server
 /tmp
 /out-tsc
 
@@ -20,9 +19,6 @@
 
 # IDE - VSCode
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/extensions.json
 
 # misc
 /.sass-cache
@@ -30,6 +26,7 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
 /typings
 
