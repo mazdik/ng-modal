@@ -8,7 +8,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
 
-  public state: string = 'basic-demo';
+  state: string = 'basic-demo';
 
   responsiveMenu() {
     const x = document.getElementById('myTopnav');
