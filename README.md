@@ -15,7 +15,6 @@ import {Component} from '@angular/core';
                [modalTitle]="'Demo modal'"
                [width]="500"
                [zIndex]="1100"
-               [autoZIndex]="false"
                (close)="onCloseModal()">
       <ng-container class="app-modal-body">
         <h3>MODAL DIALOG</h3>

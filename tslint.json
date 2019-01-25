@@ -1,6 +1,6 @@
 {
   "rulesDirectory": [
-    "node_modules/codelyzer"
+    "codelyzer"
   ],
   "rules": {
     "arrow-return-shorthand": true,
@@ -60,11 +60,12 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
-      false,
+      true,
       "ignore-params"
     ],
     "no-misused-new": true,
     "no-non-null-assertion": true,
+    "no-redundant-jsdoc": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,

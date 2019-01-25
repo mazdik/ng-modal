@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ModalComponent } from '../ng-modal/modal.component';
+import { ModalModule } from '../ng-modal';
 
 
 import { AppComponent } from './app.component';
@@ -11,13 +11,13 @@ import { PanelDemoComponent } from './panel-demo.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ModalComponent,
     ModalDemoComponent,
     NestedModalDemoComponent,
     PanelDemoComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
