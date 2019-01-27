@@ -1,6 +1,6 @@
-# Angular 7 Resizable and draggable Modal
+# Angular resizable and draggable modal
 
-Simple Resizable and draggable modal component.
+Simple resizable and draggable modal component.
  (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>) 
 
 ### Sample
@@ -12,27 +12,27 @@ import { ModalModule } from '../lib/modal';
     ModalModule
   ]
 })
-export class AppModule { }
 ```
 
 ```html
-    <button type="button" class="button" (click)="modalRoot.show()">Open modal</button>
-    <app-modal #modalRoot
-               [modalTitle]="'Demo modal'"
-               [width]="500"
-               [zIndex]="1100"
-               (close)="onCloseModal()">
-      <ng-container class="app-modal-body">
-        <h3>MODAL DIALOG</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.</p>
-      </ng-container>
-      <ng-container class="app-modal-footer">
-        <button type="button" class="button button3" (click)="modalRoot.hide()">Delete</button>
-        <button type="button" class="button button1" (click)="modalRoot.hide()">Save</button>
-        <button type="button" class="button button2" style="float: right;" (click)="modalRoot.hide()">Close</button>
-      </ng-container>
-    </app-modal>
+<button type="button" class="button" (click)="modalRoot.show()">Open modal</button>
+<app-modal #modalRoot
+            [modalTitle]="'Demo modal'"
+            [width]="500"
+            [zIndex]="1100"
+            (close)="onCloseModal()">
+  <ng-container class="app-modal-body">
+    <h3>MODAL DIALOG</h3>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.</p>
+  </ng-container>
+  <ng-container class="app-modal-footer">
+    <button type="button" class="button button3" (click)="modalRoot.hide()">Delete</button>
+    <button type="button" class="button button1" (click)="modalRoot.hide()">Save</button>
+    <button type="button" class="button button2" style="float: right;" (click)="modalRoot.hide()">Close
+    </button>
+  </ng-container>
+</app-modal>
 ```
 
 ### Properties
