@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ModalModule } from '../ng-modal';
-
+import { ModalModule } from '../lib/modal';
 
 import { AppComponent } from './app.component';
 import { ModalDemoComponent } from './modal-demo.component';
@@ -19,7 +18,6 @@ import { PanelDemoComponent } from './panel-demo.component';
     BrowserModule,
     ModalModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

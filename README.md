@@ -1,15 +1,21 @@
-# Angular 5 Resizable and draggable Modal
+# Angular 7 Resizable and draggable Modal
 
 Simple Resizable and draggable modal component.
  (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>) 
 
 ### Sample
 ```typescript
-import {Component} from '@angular/core';
+import { ModalModule } from '../lib/modal';
 
-@Component({
-  selector: 'app-modal-demo',
-  template: `
+@NgModule({
+  imports: [
+    ModalModule
+  ]
+})
+export class AppModule { }
+```
+
+```html
     <button type="button" class="button" (click)="modalRoot.show()">Open modal</button>
     <app-modal #modalRoot
                [modalTitle]="'Demo modal'"
@@ -27,14 +33,6 @@ import {Component} from '@angular/core';
         <button type="button" class="button button2" style="float: right;" (click)="modalRoot.hide()">Close</button>
       </ng-container>
     </app-modal>
-  `
-})
-export class ModalDemoComponent {
-
-  onCloseModal() {
-  }
-
-}
 ```
 
 ### Properties
@@ -49,4 +47,3 @@ export class ModalDemoComponent {
 | scrollTop        | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |
-| styleClass       | string     | null    |             |

@@ -1,19 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ModalComponent} from './modal.component';
-import {ResizableModule} from '../resizable';
+import {DraggableDirective} from './draggable.directive';
 
 @NgModule({
   imports: [
     CommonModule,
-    ResizableModule,
   ],
   declarations: [
-    ModalComponent,
+    DraggableDirective,
   ],
   exports: [
-    ModalComponent,
+    DraggableDirective,
   ],
   providers: []
 })
-export class ModalModule {}
+export class DraggableModule {}
