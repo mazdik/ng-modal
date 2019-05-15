@@ -1,6 +1,5 @@
 import {
-  Component, ElementRef, ViewChild, Input, Output, OnInit, AfterViewChecked,
-  HostListener, HostBinding, EventEmitter
+  Component, ElementRef, ViewChild, Input, Output, OnInit, AfterViewChecked, HostListener, HostBinding, EventEmitter, ViewEncapsulation
 } from '@angular/core';
 import {ResizableEvent} from '../resizable';
 import {maxZIndex, findAncestor} from '../common/utils';
@@ -8,7 +7,8 @@ import {maxZIndex, findAncestor} from '../common/utils';
 @Component({
   selector: 'app-modal',
   templateUrl: 'modal.component.html',
-  styleUrls: ['modal.component.css']
+  styleUrls: ['modal.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ModalComponent implements OnInit, AfterViewChecked {
 
@@ -21,7 +21,7 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   @Input() maximizable: boolean;
   @Input() backdrop: boolean = true;
 
-  @Output() close: EventEmitter<boolean> = new EventEmitter();
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
 
   @ViewChild('modalRoot') modalRoot: ElementRef;
   @ViewChild('modalBody') modalBody: ElementRef;
@@ -84,7 +84,7 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
   hide(): void {
     this.visible = false;
-    this.close.emit(true);
+    this.closeModal.emit(true);
     this.focusLastModal();
   }
 

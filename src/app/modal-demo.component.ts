@@ -9,7 +9,7 @@ import {Component, Input} from '@angular/core';
                [width]="500"
                [zIndex]="zIndex"
                [maximizable]="true"
-               (close)="onCloseModal()">
+               (closeModal)="onCloseModal()">
       <ng-container class="app-modal-body">
         <h3>MODAL DIALOG</h3>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.

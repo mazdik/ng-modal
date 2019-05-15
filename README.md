@@ -20,7 +20,7 @@ import { ModalModule } from '../lib/modal';
             [modalTitle]="'Demo modal'"
             [width]="500"
             [zIndex]="1100"
-            (close)="onCloseModal()">
+            (closeModal)="onCloseModal()">
   <ng-container class="app-modal-body">
     <h3>MODAL DIALOG</h3>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
