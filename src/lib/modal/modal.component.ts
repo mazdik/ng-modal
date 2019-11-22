@@ -1,7 +1,7 @@
 import {
   Component, ElementRef, ViewChild, Input, Output, OnInit, AfterViewChecked, HostListener, HostBinding, EventEmitter, ViewEncapsulation
 } from '@angular/core';
-import {ResizableEvent} from '../resizable';
+import {ResizableEvent} from '../resizable/types';
 import {maxZIndex, findAncestor} from '../common/utils';
 
 @Component({
@@ -13,10 +13,7 @@ import {maxZIndex, findAncestor} from '../common/utils';
 export class ModalComponent implements OnInit, AfterViewChecked {
 
   @Input() modalTitle: string;
-  @Input() width: any;
   @Input() zIndex: number;
-  @Input() minWidth: number = 260;
-  @Input() minHeight: number = 200;
   @Input() scrollTop: boolean = true;
   @Input() maximizable: boolean;
   @Input() backdrop: boolean = true;
@@ -192,8 +189,6 @@ export class ModalComponent implements OnInit, AfterViewChecked {
     return {
       display: this.visible ? 'block' : 'none',
       'z-index': this.contentzIndex,
-      'width.px': this.width,
-      'min-width.px': this.minWidth,
     };
   }
 

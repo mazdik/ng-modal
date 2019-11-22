@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ModalModule } from '../lib/modal';
+import { ModalModule } from '../lib/modal/modal-module';
 
 import { AppComponent } from './app.component';
 import { ModalDemoComponent } from './modal-demo.component';

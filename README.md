@@ -5,7 +5,7 @@ Simple resizable and draggable modal component.
 
 ### Sample
 ```typescript
-import { ModalModule } from '../lib/modal';
+import { ModalModule } from '../lib/modal/modal-module';
 
 @NgModule({
   imports: [
@@ -17,10 +17,10 @@ import { ModalModule } from '../lib/modal';
 ```html
 <button type="button" class="button" (click)="modalRoot.show()">Open modal</button>
 <app-modal #modalRoot
-            [modalTitle]="'Demo modal'"
-            [width]="500"
-            [zIndex]="1100"
-            (closeModal)="onCloseModal()">
+           class="modal-demo"
+           [modalTitle]="'Demo modal'"
+           [zIndex]="1100"
+           (closeModal)="onCloseModal()">
   <ng-container class="app-modal-body">
     <h3>MODAL DIALOG</h3>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -35,15 +35,19 @@ import { ModalModule } from '../lib/modal';
 </app-modal>
 ```
 
+```css
+.modal-demo .ui-modal {
+  width: 37.5rem;
+}
+```
+For resize limits use min-width, min-height, max-width, max-height in css.
+
 ### Properties
 
 | Attribute        | Type       | Default | Description |
 |------------------|------------|---------|-------------|
 | modalTitle       | string     | null    |             |
-| width            | any        | null    |             |
 | zIndex           | number     | null    |             |
-| minWidth         | number     | 260     |             |
-| minHeight        | number     | 200     |             |
 | scrollTop        | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |
