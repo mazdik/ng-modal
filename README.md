@@ -48,6 +48,6 @@ For resize limits use min-width, min-height, max-width, max-height in css.
 |------------------|------------|---------|-------------|
 | modalTitle       | string     | null    |             |
 | zIndex           | number     | null    |             |
-| scrollTop        | boolean    | true    |             |
+| scrollTopEnable  | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |
