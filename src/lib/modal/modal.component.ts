@@ -1,5 +1,5 @@
 import {
-  Component, ElementRef, ViewChild, Input, Output, OnInit, HostListener, EventEmitter, ViewEncapsulation
+  Component, ElementRef, ViewChild, Input, Output, OnInit, AfterViewChecked, HostListener, EventEmitter, ViewEncapsulation
 } from '@angular/core';
 import {ResizableEvent} from '../resizable/types';
 import {maxZIndex, findAncestor} from '../common/utils';
@@ -10,7 +10,7 @@ import {maxZIndex, findAncestor} from '../common/utils';
   styleUrls: ['modal.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, AfterViewChecked {
 
   @Input() zIndex: number;
   @Input() scrollTopEnable: boolean = true;
@@ -26,6 +26,7 @@ export class ModalComponent implements OnInit {
   @ViewChild('closeIcon', {static: false}) closeIcon: ElementRef;
 
   visible: boolean;
+  executePostDisplayActions: boolean;
   maximized: boolean;
   preMaximizeRootWidth: number;
   preMaximizeRootHeight: number;
@@ -43,6 +44,13 @@ export class ModalComponent implements OnInit {
     }
   }
 
+  ngAfterViewChecked() {
+    if (this.executePostDisplayActions) {
+      this.center();
+      this.executePostDisplayActions = false;
+    }
+  }
+
   @HostListener('keydown.esc', ['$event'])
   onKeyDown(event): void {
     event.preventDefault();
@@ -52,11 +60,12 @@ export class ModalComponent implements OnInit {
 
   @HostListener('window:resize')
   onWindowResize(): void {
+    this.executePostDisplayActions = true;
     this.center();
   }
 
   show(): void {
-    this.center();
+    this.executePostDisplayActions = true;
     this.visible = true;
     setTimeout(() => {
       this.modalRoot.nativeElement.focus();
