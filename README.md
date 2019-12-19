@@ -18,9 +18,9 @@ import { ModalModule } from '../lib/modal/modal-module';
 <button type="button" class="button" (click)="modalRoot.show()">Open modal</button>
 <app-modal #modalRoot
            class="modal-demo"
-           [modalTitle]="'Demo modal'"
            [zIndex]="1100"
            (closeModal)="onCloseModal()">
+  <ng-container class="app-modal-header">Demo modal</ng-container>
   <ng-container class="app-modal-body">
     <h3>MODAL DIALOG</h3>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -46,7 +46,6 @@ For resize limits use min-width, min-height, max-width, max-height in css.
 
 | Attribute        | Type       | Default | Description |
 |------------------|------------|---------|-------------|
-| modalTitle       | string     | null    |             |
 | zIndex           | number     | null    |             |
 | scrollTopEnable  | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |

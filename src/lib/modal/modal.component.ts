@@ -1,5 +1,5 @@
 import {
-  Component, ElementRef, ViewChild, Input, Output, OnInit, AfterViewChecked, HostListener, EventEmitter, ViewEncapsulation
+  Component, ElementRef, ViewChild, Input, Output, OnInit, HostListener, EventEmitter, ViewEncapsulation
 } from '@angular/core';
 import {ResizableEvent} from '../resizable/types';
 import {maxZIndex, findAncestor} from '../common/utils';
@@ -10,9 +10,8 @@ import {maxZIndex, findAncestor} from '../common/utils';
   styleUrls: ['modal.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ModalComponent implements OnInit, AfterViewChecked {
+export class ModalComponent implements OnInit {
 
-  @Input() modalTitle: string;
   @Input() zIndex: number;
   @Input() scrollTopEnable: boolean = true;
   @Input() maximizable: boolean;
@@ -27,8 +26,6 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   @ViewChild('closeIcon', {static: false}) closeIcon: ElementRef;
 
   visible: boolean;
-  contentzIndex: number;
-  executePostDisplayActions: boolean;
   maximized: boolean;
   preMaximizeRootWidth: number;
   preMaximizeRootHeight: number;
@@ -44,14 +41,6 @@ export class ModalComponent implements OnInit, AfterViewChecked {
       this.zIndex = this.getMaxModalIndex();
       this.zIndex = (this.zIndex || 1000) + 1;
     }
-    this.contentzIndex = this.zIndex + 1;
-  }
-
-  ngAfterViewChecked() {
-    if (this.executePostDisplayActions) {
-      this.center();
-      this.executePostDisplayActions = false;
-    }
   }
 
   @HostListener('keydown.esc', ['$event'])
@@ -63,12 +52,11 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
   @HostListener('window:resize')
   onWindowResize(): void {
-    this.executePostDisplayActions = true;
     this.center();
   }
 
   show(): void {
-    this.executePostDisplayActions = true;
+    this.center();
     this.visible = true;
     setTimeout(() => {
       this.modalRoot.nativeElement.focus();
@@ -131,9 +119,9 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   }
 
   focusLastModal() {
-    const modal = findAncestor(this.element.nativeElement.parentElement, 'app-modal');
-    if (modal && modal.children[1]) {
-      modal.children[1].focus();
+    const modal = findAncestor(this.element.nativeElement.parentElement, '.ui-modal');
+    if (modal) {
+      modal.focus();
     }
   }
 
@@ -177,8 +165,8 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   moveOnTop() {
     if (!this.backdrop) {
       const zIndex = this.getMaxModalIndex();
-      if (this.contentzIndex <= zIndex) {
-        this.contentzIndex = zIndex + 1;
+      if (this.zIndex <= zIndex) {
+        this.zIndex = zIndex + 1;
       }
     }
   }
@@ -186,7 +174,7 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   get dialogStyles() {
     return {
       display: this.visible ? 'block' : 'none',
-      'z-index': this.contentzIndex,
+      'z-index': this.zIndex,
     };
   }
 
