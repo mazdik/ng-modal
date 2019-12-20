@@ -43,11 +43,28 @@ import { ModalModule } from 'ng-modal-lib';
 .modal-demo .ui-modal {
   width: 37.5rem;
 }
+```
+
+For resize limits use min-width, min-height, max-width, max-height in css.
+
+```css
 .modal-demo .ui-modal-overlay, .modal-demo .ui-modal {
   z-index: 10;
 }
+
+```css
+/* colors */
+:root {
+  --dt-color-primary: #5b9bd5;
+}
 ```
-For resize limits use min-width, min-height, max-width, max-height in css.
+
+```css
+/* for IE */
+.ui-modal-header {
+  background-color: #5b9bd5;
+}
+```
 
 ### Properties
 

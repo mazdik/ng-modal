@@ -19,3 +19,7 @@ a {
   transition: all 0.3s linear 0s;
   color: #337ab7;
 }
+
+.ui-modal-header {
+  background-color: #5b9bd5;
+}
