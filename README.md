@@ -18,7 +18,6 @@ import { ModalModule } from '../lib/modal/modal-module';
 <button type="button" class="button" (click)="modalRoot.show()">Open modal</button>
 <app-modal #modalRoot
            class="modal-demo"
-           [zIndex]="1100"
            (closeModal)="onCloseModal()">
   <ng-container class="app-modal-header">Demo modal</ng-container>
   <ng-container class="app-modal-body">
@@ -39,6 +38,9 @@ import { ModalModule } from '../lib/modal/modal-module';
 .modal-demo .ui-modal {
   width: 37.5rem;
 }
+.modal-demo .ui-modal-overlay, .modal-demo .ui-modal {
+  z-index: 10;
+}
 ```
 For resize limits use min-width, min-height, max-width, max-height in css.
 
@@ -46,7 +48,6 @@ For resize limits use min-width, min-height, max-width, max-height in css.
 
 | Attribute        | Type       | Default | Description |
 |------------------|------------|---------|-------------|
-| zIndex           | number     | null    |             |
 | scrollTopEnable  | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |

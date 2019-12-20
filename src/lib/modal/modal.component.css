@@ -2,6 +2,10 @@
 @import "../styles/colors.css";
 @import "../styles/resizable.css";
 
+.ui-modal-overlay, .ui-modal {
+  z-index: 10;
+}
+
 .ui-modal-overlay {
   display: none;
   position: fixed;

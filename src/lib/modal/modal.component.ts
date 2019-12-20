@@ -1,5 +1,5 @@
 import {
-  Component, ElementRef, ViewChild, Input, Output, OnInit, AfterViewChecked, HostListener, EventEmitter, ViewEncapsulation
+  Component, ElementRef, ViewChild, Input, Output, AfterViewChecked, HostListener, EventEmitter, ViewEncapsulation
 } from '@angular/core';
 import {ResizableEvent} from '../resizable/types';
 import {maxZIndex, findAncestor} from '../common/utils';
@@ -10,9 +10,8 @@ import {maxZIndex, findAncestor} from '../common/utils';
   styleUrls: ['modal.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ModalComponent implements OnInit, AfterViewChecked {
+export class ModalComponent implements AfterViewChecked {
 
-  @Input() zIndex: number;
   @Input() scrollTopEnable: boolean = true;
   @Input() maximizable: boolean;
   @Input() backdrop: boolean = true;
@@ -36,13 +35,6 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   dragEventTarget: MouseEvent | TouchEvent;
 
   constructor(private element: ElementRef) {}
-
-  ngOnInit() {
-    if (!this.zIndex) {
-      this.zIndex = this.getMaxModalIndex();
-      this.zIndex = (this.zIndex || 1000) + 1;
-    }
-  }
 
   ngAfterViewChecked() {
     if (this.executePostDisplayActions) {
@@ -173,24 +165,24 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
   moveOnTop() {
     if (!this.backdrop) {
-      const zIndex = this.getMaxModalIndex();
-      if (this.zIndex <= zIndex) {
-        this.zIndex = zIndex + 1;
+      const maxModalIndex = this.getMaxModalIndex();
+      let zIndex = parseFloat(window.getComputedStyle(this.modalRoot.nativeElement).zIndex) || 0;
+      if (zIndex <= maxModalIndex) {
+        zIndex = maxModalIndex + 1;
+        this.modalRoot.nativeElement.style.zIndex = zIndex.toString();
       }
     }
   }
 
   get dialogStyles() {
     return {
-      display: this.visible ? 'block' : 'none',
-      'z-index': this.zIndex,
+      display: this.visible ? 'block' : 'none'
     };
   }
 
   get overlayStyles() {
     return {
-      display: (this.visible && this.backdrop) ? 'block' : 'none',
-      'z-index': this.zIndex,
+      display: (this.visible && this.backdrop) ? 'block' : 'none'
     };
   }
 
