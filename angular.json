@@ -114,6 +114,41 @@
           }
         }
       }
+    },
+    "ng-modal-lib": {
+      "projectType": "library",
+      "root": "projects/ng-modal-lib",
+      "sourceRoot": "projects/ng-modal-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-modal-lib/tsconfig.lib.json",
+            "project": "projects/ng-modal-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-modal-lib/src/test.ts",
+            "tsConfig": "projects/ng-modal-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-modal-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-modal-lib/tsconfig.lib.json",
+              "projects/ng-modal-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ng-modal"
 }

@@ -3,9 +3,14 @@
 Simple resizable and draggable modal component.
  (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>) 
 
+### Installation
+```
+npm i ng-modal-lib --save
+```
+
 ### Sample
 ```typescript
-import { ModalModule } from '../lib/modal/modal-module';
+import { ModalModule } from 'ng-modal-lib';
 
 @NgModule({
   imports: [

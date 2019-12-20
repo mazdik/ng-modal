@@ -1,6 +1,13 @@
-@import "../styles/ie.css";
-@import "../styles/colors.css";
-@import "../styles/resizable.css";
+.ui-modal-header {
+  background-color: #5b9bd5;
+}
+.dragging {
+  border-color: #66afe9;
+}
+:root {
+  --dt-color-primary: #5b9bd5;
+  --dt-color-primary-lighter: #66afe9;
+}
 
 .ui-modal-overlay, .ui-modal {
   z-index: 10;
@@ -145,4 +152,37 @@
 }
 .dt-icon-close:after{
   transform: translate(-50%, -50%) rotate(225deg)
+}
+
+/* resize */
+
+.resize-handle-e {
+  position: absolute;
+  cursor: e-resize;
+  height: 100%;
+  width: .4375rem;
+  right: -.3125rem;
+  top: 0;
+}
+
+.resize-handle-se {
+  position:absolute;
+  cursor: se-resize;
+  height: 1rem;
+  width: 1rem;
+  right: 0;
+  bottom: 0;
+}
+
+.resize-handle-s {
+  position:absolute;
+  cursor: s-resize;
+  height: .4375rem;
+  width: 100%;
+  bottom: -.3125rem;
+  left: 0;
+}
+
+.resizing {
+  user-select: none;
 }

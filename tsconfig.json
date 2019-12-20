@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-modal-lib": [
+        "dist/ng-modal-lib"
+      ],
+      "ng-modal-lib/*": [
+        "dist/ng-modal-lib/*"
+      ]
+    }
   }
 }
