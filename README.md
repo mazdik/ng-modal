@@ -1,9 +1,7 @@
 # Angular resizable and draggable modal
 
-Simple resizable and draggable modal component.
- (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>) 
+Simple resizable and draggable modal component. (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>)
 
-### Installation
 ```
 npm i ng-modal-lib --save
 ```
@@ -42,24 +40,15 @@ import { ModalModule } from 'ng-modal-lib';
 ```css
 .modal-demo .ui-modal {
   width: 37.5rem;
+  /* for resize limits use min-width, min-height, max-width, max-height in css */
 }
-```
-
-For resize limits use min-width, min-height, max-width, max-height in css.
-
-```css
 .modal-demo .ui-modal-overlay, .modal-demo .ui-modal {
   z-index: 10;
 }
-
-```css
 /* colors */
 :root {
   --dt-color-primary: #5b9bd5;
 }
-```
-
-```css
 /* for IE */
 .ui-modal-header {
   background-color: #5b9bd5;
@@ -73,3 +62,5 @@ For resize limits use min-width, min-height, max-width, max-height in css.
 | scrollTopEnable  | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |
+
+<a target="_blank" href="https://github.com/mazdik/web-modal">version in vanilla js</a>
