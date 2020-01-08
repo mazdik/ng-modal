@@ -1,9 +1,7 @@
 # Angular resizable and draggable modal
 
-Simple resizable and draggable modal component.
- (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>) 
+Simple resizable and draggable modal component. (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>)
 
-### Installation
 ```
 npm i ng-modal-lib --save
 ```
@@ -64,3 +62,5 @@ import { ModalModule } from 'ng-modal-lib';
 | scrollTopEnable  | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |
+
+<a target="_blank" href="https://github.com/mazdik/web-modal">version in vanilla js</a>
