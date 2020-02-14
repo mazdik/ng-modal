@@ -2,6 +2,8 @@
 
 Simple resizable and draggable modal component. (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>)
 
+<a target="_blank" href="https://github.com/mazdik/web-modal">version in vanilla js</a>
+
 ```
 npm i ng-modal-lib --save
 ```
@@ -19,9 +21,7 @@ import { ModalModule } from 'ng-modal-lib';
 
 ```html
 <button type="button" class="button" (click)="modalRoot.show()">Open modal</button>
-<app-modal #modalRoot
-           class="modal-demo"
-           (closeModal)="onCloseModal()">
+<app-modal #modalRoot class="modal-demo">
   <ng-container class="app-modal-header">Demo modal</ng-container>
   <ng-container class="app-modal-body">
     <h3>MODAL DIALOG</h3>
@@ -62,5 +62,3 @@ import { ModalModule } from 'ng-modal-lib';
 | scrollTopEnable  | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |
-
-<a target="_blank" href="https://github.com/mazdik/web-modal">version in vanilla js</a>

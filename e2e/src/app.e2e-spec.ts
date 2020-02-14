@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to ng-modal!');
+    expect(page.getTitleText()).toEqual('ng-modal app is running!');
   });
 
   afterEach(async () => {
