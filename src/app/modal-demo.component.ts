@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
     <button class="dt-button" (click)="modalRoot.show()">Open modal</button>
     <app-modal #modalRoot
                [maximizable]="true"
+               [inViewport]="true"
                (closeModal)="onCloseModal()">
       <ng-container class="app-modal-header">Demo modal</ng-container>
       <ng-container class="app-modal-body">

@@ -11,7 +11,7 @@ export class DraggableDirective implements OnChanges, OnDestroy {
   @Input() dragEventTarget: MouseEvent | TouchEvent;
   @Input() dragX: boolean = true;
   @Input() dragY: boolean = true;
-  @Input() inViewport: boolean = true;
+  @Input() inViewport: boolean;
 
   @Output() dragStart: EventEmitter<any> = new EventEmitter();
   @Output() dragMove: EventEmitter<any> = new EventEmitter();

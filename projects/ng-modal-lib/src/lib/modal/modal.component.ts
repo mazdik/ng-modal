@@ -15,7 +15,7 @@ export class ModalComponent implements AfterViewChecked {
   @Input() scrollTopEnable: boolean = true;
   @Input() maximizable: boolean;
   @Input() backdrop: boolean = true;
-  @Input() inViewport: boolean = true;
+  @Input() inViewport: boolean;
 
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
 
