@@ -62,3 +62,4 @@ import { ModalModule } from 'ng-modal-lib';
 | scrollTopEnable  | boolean    | true    |             |
 | maximizable      | boolean    | false   |             |
 | backdrop         | boolean    | true    |             |
+| inViewport       | boolean    | true    |             |
