@@ -8,9 +8,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
 
-  state: string = 'basic-demo';
+  state = 'basic-demo';
 
-  responsiveMenu() {
+  responsiveMenu(): void {
     const x = document.getElementById('myTopnav');
     if (x.className === 'topnav') {
       x.className += ' responsive';

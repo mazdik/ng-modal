@@ -24,6 +24,6 @@ import { Component } from '@angular/core';
 })
 export class ModalDemoComponent {
 
-  onCloseModal() {}
+  onCloseModal(): void {}
 
 }

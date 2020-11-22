@@ -9,8 +9,8 @@ import {isLeftButton, getEvent} from '../common/utils';
 export class DraggableDirective implements OnChanges, OnDestroy {
 
   @Input() dragEventTarget: MouseEvent | TouchEvent;
-  @Input() dragX: boolean = true;
-  @Input() dragY: boolean = true;
+  @Input() dragX = true;
+  @Input() dragY = true;
   @Input() inViewport: boolean;
 
   @Output() dragStart: EventEmitter<any> = new EventEmitter();
@@ -66,7 +66,7 @@ export class DraggableDirective implements OnChanges, OnDestroy {
     this.dragEnd.emit(event);
   }
 
-  addEventListeners(event: MouseEvent | TouchEvent) {
+  addEventListeners(event: MouseEvent | TouchEvent): void {
     const isTouchEvent = event.type.startsWith('touch');
     const moveEvent = isTouchEvent ? 'touchmove' : 'mousemove';
     const upEvent = isTouchEvent ? 'touchend' : 'mouseup';
@@ -88,13 +88,13 @@ export class DraggableDirective implements OnChanges, OnDestroy {
     });
   }
 
-  removeEventListener() {
+  removeEventListener(): void {
     this.globalListeners.forEach((config, name) => {
       window.document.removeEventListener(name, config.handler, config.options);
     });
   }
 
-  initDrag(pageX: number, pageY: number) {
+  initDrag(pageX: number, pageY: number): void {
       this.isDragging = true;
       this.lastPageX = pageX;
       this.lastPageY = pageY;
@@ -106,7 +106,7 @@ export class DraggableDirective implements OnChanges, OnDestroy {
       this.vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
   }
 
-  onDrag(pageX: number, pageY: number) {
+  onDrag(pageX: number, pageY: number): void {
     if (this.isDragging) {
       const deltaX = pageX - this.lastPageX;
       const deltaY = pageY - this.lastPageY;
@@ -142,7 +142,7 @@ export class DraggableDirective implements OnChanges, OnDestroy {
     }
   }
 
-  endDrag() {
+  endDrag(): void {
     this.isDragging = false;
     this.element.nativeElement.classList.remove('dragging');
   }
