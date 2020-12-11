@@ -177,6 +177,56 @@
   left: 0;
 }
 
+
+.resize-handle-sw {
+  position:absolute;
+  cursor: sw-resize;
+  height: 7px;
+  width: 15px;
+  height: 15px;
+  bottom: 0;
+  left: 0;
+}
+
+.resize-handle-w {
+  position:absolute;
+  cursor: w-resize;
+  height: 100%;
+  width: 7px;
+  left: -5px;
+  top: 0;
+}
+
+.resize-handle-nw {
+  position:absolute;
+  cursor: nw-resize;
+  height: 7px;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  left: 0;
+}
+
+.resize-handle-n {
+  position:absolute;
+  cursor: n-resize;
+  height: 7px;
+  width: 95%;
+  top: -5px;
+  left: 0;
+}
+
+
+.resize-handle-ne {
+  position:absolute;
+  cursor: ne-resize;
+  height: 7px;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  right: 0;
+}
+
 .resizing {
   user-select: none;
 }

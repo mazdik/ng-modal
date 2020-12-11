@@ -2,8 +2,8 @@
   "name": "ng-modal-lib",
   "version": "0.0.7",
   "peerDependencies": {
-    "@angular/common": "^11.0.1",
-    "@angular/core": "^11.0.1"
+    "@angular/common": "^11.0.4",
+    "@angular/core": "^11.0.4"
   },
   "dependencies": {
     "tslib": "^2.0.0"
