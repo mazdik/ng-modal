@@ -1,27 +1,65 @@
-# NgModal
+# Angular resizable and draggable modal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+Simple resizable and draggable modal component. (<a target="_blank" href="https://mazdik.github.io/ng-modal/">Demo</a>)
 
-## Development server
+<a target="_blank" href="https://github.com/mazdik/web-modal">version in vanilla js</a>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+npm i ng-modal-lib --save
+```
 
-## Code scaffolding
+### Sample
+```typescript
+import { ModalModule } from 'ng-modal-lib';
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+@NgModule({
+  imports: [
+    ModalModule
+  ]
+})
+```
 
-## Build
+```html
+<button type="button" class="button" (click)="modalRoot.show()">Open modal</button>
+<app-modal #modalRoot class="modal-demo">
+  <ng-container class="app-modal-header">Demo modal</ng-container>
+  <ng-container class="app-modal-body">
+    <h3>MODAL DIALOG</h3>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.</p>
+  </ng-container>
+  <ng-container class="app-modal-footer">
+    <button type="button" class="button button3" (click)="modalRoot.hide()">Delete</button>
+    <button type="button" class="button button1" (click)="modalRoot.hide()">Save</button>
+    <button type="button" class="button button2" style="float: right;" (click)="modalRoot.hide()">Close
+    </button>
+  </ng-container>
+</app-modal>
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```css
+.modal-demo .ui-modal {
+  width: 37.5rem;
+  /* for resize limits use min-width, min-height, max-width, max-height in css */
+}
+.modal-demo .ui-modal-overlay, .modal-demo .ui-modal {
+  z-index: 10;
+}
+/* colors */
+:root {
+  --dt-color-primary: #5b9bd5;
+}
+/* for IE */
+.ui-modal-header {
+  background-color: #5b9bd5;
+}
+```
 
-## Running unit tests
+### Properties
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+| Attribute        | Type       | Default | Description |
+|------------------|------------|---------|-------------|
+| scrollTopEnable  | boolean    | true    |             |
+| maximizable      | boolean    | false   |             |
+| backdrop         | boolean    | true    |             |
+| inViewport       | boolean    | false   |             |
