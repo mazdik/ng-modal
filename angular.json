@@ -96,7 +96,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "preserveSymLinks": true
           }
         }
       }
