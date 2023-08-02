@@ -16,7 +16,7 @@ export class ModalComponent implements AfterViewChecked {
   @Input() maximizable: boolean;
   @Input() backdrop = true;
   @Input() inViewport: boolean;
-
+  @Input() dontDestroyOnClose = true;
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
 
   @ViewChild('modalRoot', {static: false}) modalRoot: ElementRef;
@@ -25,6 +25,7 @@ export class ModalComponent implements AfterViewChecked {
   @ViewChild('modalFooter', {static: false}) modalFooter: ElementRef;
   @ViewChild('closeIcon', {static: false}) closeIcon: ElementRef;
 
+  clearable = false;
   visible: boolean;
   executePostDisplayActions: boolean;
   maximized: boolean;
@@ -80,7 +81,7 @@ export class ModalComponent implements AfterViewChecked {
 
     if (elementWidth === 0 && elementHeight === 0) {
       this.modalRoot.nativeElement.style.visibility = 'hidden';
-      this.modalRoot.nativeElement.style.display = 'block';
+      this.modalRoot.nativeElement.style.display = 'flex';
       elementWidth = this.modalRoot.nativeElement.offsetWidth;
       elementHeight = this.modalRoot.nativeElement.offsetHeight;
       this.modalRoot.nativeElement.style.display = 'none';
@@ -136,6 +137,13 @@ export class ModalComponent implements AfterViewChecked {
     event.preventDefault();
   }
 
+  resizeToContentHeight() {
+    const height = this.modalBody.nativeElement.scrollHeight
+           + this.modalFooter.nativeElement.offsetHeight
+           + this.modalHeader.nativeElement.offsetHeight;
+    this.modalRoot.nativeElement.style.height = height + 'px';
+    this.calcBodyHeight();
+  }
   maximize(): void {
     this.preMaximizePageX = parseFloat(this.modalRoot.nativeElement.style.top);
     this.preMaximizePageY = parseFloat(this.modalRoot.nativeElement.style.left);

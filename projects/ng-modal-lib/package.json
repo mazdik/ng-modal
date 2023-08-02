@@ -1,6 +1,6 @@
 {
   "name": "ng-modal-lib",
-  "version": "0.0.9",
+  "version": "0.0.15",
   "peerDependencies": {
     "@angular/common": "^14.1.0",
     "@angular/core": "^14.1.0"
