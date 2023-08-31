@@ -1,7 +1,7 @@
 <div class="ui-modal-overlay" [style.display]="(visible && backdrop) ? 'block' : 'none'"></div>
   <div class="ui-modal" tabindex="-1" role="dialog"
   #modalRoot
-  appResizable
+  [appResizable]="resizeable"
   [south]="true"
   [east]="true"
   [southEast]="true"

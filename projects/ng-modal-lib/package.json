@@ -1,11 +1,11 @@
 {
-  "name": "ng-modal-lib",
-  "version": "0.0.15",
+  "name": "ng-modal-full-resizable",
+  "version": "0.0.19",
   "peerDependencies": {
-    "@angular/common": "^14.1.0",
-    "@angular/core": "^14.1.0"
+    "@angular/common": ">=15.1.0",
+    "@angular/core": ">=15.1.0"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": ">=2.3.0"
   }
 }

@@ -9,10 +9,11 @@ import { ModalComponent } from 'ng-modal-lib';
                 [maximizable]="true"
                 [inViewport]="true"
                 [dontDestroyOnClose]="false"
+                (openModal)="onOpenModal()"
                 (closeModal)="onCloseModal()">
         <ng-container class="app-modal-header">Demo modal</ng-container>
         <ng-container class="app-modal-body">
-          <div style="height: 100%;">
+          <div style="height: 120px;">
             <h3>MODAL DIALOG</h3>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
               Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.</p>
@@ -29,6 +30,10 @@ import { ModalComponent } from 'ng-modal-lib';
 })
 export class ModalDemoComponent {
   @ViewChild('modalRoot') modalRoot: ModalComponent;
+  onOpenModal(): void {
+    console.log('opened');
+    this.modalRoot.resizeToContentHeight();
+  }
   onCloseModal(): void {
   }
 

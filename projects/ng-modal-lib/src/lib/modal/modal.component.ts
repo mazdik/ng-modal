@@ -13,12 +13,13 @@ import {maxZIndex, findAncestor} from '../common/utils';
 export class ModalComponent implements AfterViewChecked {
 
   @Input() scrollTopEnable = true;
+  @Input() resizeable = true;
   @Input() maximizable: boolean;
   @Input() backdrop = true;
   @Input() inViewport: boolean;
   @Input() dontDestroyOnClose = true;
+  @Output() openModal: EventEmitter<boolean> = new EventEmitter();
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
-
   @ViewChild('modalRoot', {static: false}) modalRoot: ElementRef;
   @ViewChild('modalBody', {static: false}) modalBody: ElementRef;
   @ViewChild('modalHeader', {static: false}) modalHeader: ElementRef;
@@ -66,6 +67,7 @@ export class ModalComponent implements AfterViewChecked {
       if (this.scrollTopEnable) {
         this.modalBody.nativeElement.scrollTop = 0;
       }
+      this.openModal.next(true);
     }, 1);
   }
 
@@ -138,11 +140,13 @@ export class ModalComponent implements AfterViewChecked {
   }
 
   resizeToContentHeight() {
-    const height = this.modalBody.nativeElement.scrollHeight
-           + this.modalFooter.nativeElement.offsetHeight
-           + this.modalHeader.nativeElement.offsetHeight;
-    this.modalRoot.nativeElement.style.height = height + 'px';
-    this.calcBodyHeight();
+    const bodyChildren = this.modalBody.nativeElement.children;
+    const bodyRect = this.modalBody.nativeElement.getBoundingClientRect();
+    if(!bodyChildren || bodyChildren.length == 0)
+      return;
+    const height = Math.max(...[...bodyChildren].map(x => x.getBoundingClientRect()).map(x => x.top + x.height - bodyRect.top));
+    this.modalBody.nativeElement.style.height = height + 16 + 'px';
+    this.modalBody.nativeElement.style.maxHeight = 'none';
   }
   maximize(): void {
     this.preMaximizePageX = parseFloat(this.modalRoot.nativeElement.style.top);

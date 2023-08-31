@@ -10,7 +10,7 @@ import { ResizableEvent } from './types';
   selector: '[appResizable]'
 })
 export class ResizableDirective implements OnDestroy, AfterViewInit {
-
+  @Input() appResizable = true;
   @Input() south: boolean;
   @Input() east: boolean;
   @Input() southEast: boolean;
@@ -50,6 +50,9 @@ export class ResizableDirective implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if(!this.appResizable) {
+      return;
+    }
     if (this.south) {
       this.createHandle('resize-handle-s');
     }
