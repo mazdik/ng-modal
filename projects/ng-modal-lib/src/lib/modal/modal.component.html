@@ -34,7 +34,7 @@
    </div>
  </div>
 
- <div   class="ui-modal-body" #modalBody>
+ <div [ngStyle]="{ 'min-height': minHeight }"  class="ui-modal-body" #modalBody>
     <ng-container *ngIf="visible || dontDestroyOnClose">
        <ng-content select=".app-modal-body"></ng-content>
     </ng-container>

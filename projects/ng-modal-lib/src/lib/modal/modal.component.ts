@@ -18,6 +18,7 @@ export class ModalComponent implements AfterViewChecked {
   @Input() backdrop = true;
   @Input() inViewport: boolean;
   @Input() dontDestroyOnClose = true;
+  @Input() minHeight = '';
   @Output() openModal: EventEmitter<boolean> = new EventEmitter();
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
   @ViewChild('modalRoot', {static: false}) modalRoot: ElementRef;
