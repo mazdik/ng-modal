@@ -26,7 +26,7 @@ export class ModalComponent implements AfterViewChecked {
   @ViewChild('modalHeader', {static: false}) modalHeader: ElementRef;
   @ViewChild('modalFooter', {static: false}) modalFooter: ElementRef;
   @ViewChild('closeIcon', {static: false}) closeIcon: ElementRef;
-
+  @ViewChild('overlay', {static: false}) overlay: ElementRef;
   clearable = false;
   visible: boolean;
   executePostDisplayActions: boolean;
@@ -178,14 +178,12 @@ export class ModalComponent implements AfterViewChecked {
   }
 
   moveOnTop(): void {
-    if (!this.backdrop) {
       const maxModalIndex = this.getMaxModalIndex();
       let zIndex = parseFloat(window.getComputedStyle(this.modalRoot.nativeElement).zIndex) || 0;
       if (zIndex <= maxModalIndex) {
         zIndex = maxModalIndex + 1;
-        this.modalRoot.nativeElement.style.zIndex = zIndex.toString();
+        this.overlay.nativeElement.style.zIndex = zIndex.toString();
+        this.modalRoot.nativeElement.style.zIndex = (zIndex + 1).toString();
       }
-    }
   }
-
 }
