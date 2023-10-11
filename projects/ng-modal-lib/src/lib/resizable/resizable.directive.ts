@@ -20,6 +20,7 @@ export class ResizableDirective implements OnDestroy, AfterViewInit {
   @Input() northWest: boolean;
   @Input() north: boolean;
   @Input() northEast: boolean;
+  @Input() restrictHeight: number = 0;
 
   @Output() resizeBegin: EventEmitter<any> = new EventEmitter();
   @Output() resizing: EventEmitter<ResizableEvent> = new EventEmitter();
@@ -80,7 +81,7 @@ export class ResizableDirective implements OnDestroy, AfterViewInit {
     const computedStyle = window.getComputedStyle(this.element);
     this.minWidth = parseFloat(computedStyle.minWidth);
     this.maxWidth = parseFloat(computedStyle.maxWidth);
-    this.minHeight = parseFloat(computedStyle.minHeight);
+    this.minHeight = this.restrictHeight ?? parseFloat(computedStyle.minHeight);
     this.maxHeight = parseFloat(computedStyle.maxHeight);
   }
 

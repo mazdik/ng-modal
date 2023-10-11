@@ -1,7 +1,11 @@
 <div class="ui-modal-overlay" [style.display]="(visible && backdrop) ? 'block' : 'none'" #overlay></div>
   <div class="ui-modal" tabindex="-1" role="dialog"
-  #modalRoot
+  #modalRoot 
   [appResizable]="resizeable"
+  [restrictHeight]="minHeight"
+  [ngStyle]="{
+    'height': !minHeight ? undefined : minHeight + 'px'
+  }"
   [south]="true"
   [east]="true"
   [southEast]="true"
@@ -34,9 +38,9 @@
    </div>
  </div>
 
- <div [ngStyle]="{ 'min-height': minHeight }"  class="ui-modal-body" #modalBody>
+ <div class="ui-modal-body" #modalBody>
     <ng-container *ngIf="visible || dontDestroyOnClose">
-       <ng-content select=".app-modal-body"></ng-content>
+         <ng-content select=".app-modal-body"></ng-content>
     </ng-container>
  </div>
  <div class="ui-modal-footer" #modalFooter>
