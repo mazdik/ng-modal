@@ -13,8 +13,12 @@
     [ngClass]="{'active': state === 'panel-demo'}">
    Panels demo</a>
    <a href="javascript:void(0);" (click)="state='tabs-demo'"
-   [ngClass]="{'active': state === 'tabs-demo'}">
-  Tabs demo</a>
+    [ngClass]="{'active': state === 'tabs-demo'}">
+    Tabs demo</a>
+   <a href="javascript:void(0);" (click)="state='deffered-rendering-demo'"
+    [ngClass]="{'active': state === 'deffered-rendering-demo'}">
+    Deffered Rendering Demo
+  </a>
 </div>
 
 <div class="main">
@@ -22,5 +26,5 @@
   <app-nested-modal-demo *ngIf="state === 'nested-modal-demo'"></app-nested-modal-demo>
   <app-panel-demo *ngIf="state === 'panel-demo'"></app-panel-demo>
   <app-tab-modal *ngIf="state === 'tabs-demo'"></app-tab-modal>
-
+  <app-deffered-rendering-demo *ngIf="state === 'deffered-rendering-demo'"></app-deffered-rendering-demo>
 </div>

@@ -1,10 +1,12 @@
-<div class="ui-modal-overlay" [style.display]="(visible && backdrop) ? 'block' : 'none'" #overlay></div>
+<div class="ui-modal-overlay" [style.display]="(visible && backdrop) ? 'block' : 'none'"></div>
   <div class="ui-modal" tabindex="-1" role="dialog"
   #modalRoot 
   [appResizable]="resizeable"
   [restrictHeight]="minHeight"
   [ngStyle]="{
-    'height': !minHeight ? undefined : minHeight + 'px'
+    'height': !minHeight ? undefined : minHeight + 'px',
+    'opacity': visible? '0' : '1',
+    'display': visible? 'flex' : 'none'
   }"
   [south]="true"
   [east]="true"
@@ -18,14 +20,19 @@
   appDraggable
   [dragEventTarget]="dragEventTarget"
   [inViewport]="inViewport"
-  [style.display]="visible ? 'flex' : 'none'"
   (mousedown)="moveOnTop()"
   (touchstart)="moveOnTop()">
  <div class="ui-modal-header" #modalHeader
       (mousedown)="initDrag($event)"
       (touchstart)="initDrag($event)">
    <div class="ui-titlebar">
-       <ng-content select=".app-modal-header"></ng-content>
+       <ng-container *ngIf="rendered && headerTemplateRef">
+        <ng-container *ngTemplateOutlet="headerTemplateRef">
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="rendered && !headerTemplateRef">
+         <ng-content select=".app-modal-header"></ng-content>
+      </ng-container>
    </div>
    <div class="ui-controlbar">
        <i class="ui-icon"
@@ -39,11 +46,23 @@
  </div>
 
  <div class="ui-modal-body" #modalBody>
-    <ng-container *ngIf="visible || dontDestroyOnClose">
-         <ng-content select=".app-modal-body"></ng-content>
+    <ng-container *ngIf="rendered && bodyTemplateRef">
+      <ng-container *ngTemplateOutlet="bodyTemplateRef">
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="rendered && !bodyTemplateRef">
+      <ng-content select=".app-modal-body">
+      </ng-content>
     </ng-container>
  </div>
  <div class="ui-modal-footer" #modalFooter>
-   <ng-content select=".app-modal-footer"></ng-content>
+   <ng-container *ngIf="rendered && footerTemplateRef">
+    <ng-container *ngTemplateOutlet="footerTemplateRef">
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="rendered && !footerTemplateRef">
+    <ng-content select=".app-modal-footer">
+    </ng-content>
+  </ng-container>
  </div>
 </div>

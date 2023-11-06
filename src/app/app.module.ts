@@ -8,6 +8,7 @@ import { NestedModalDemoComponent } from './nested-modal-demo.component copy';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TabsModalComponent } from './tabs-modal.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { DeferredRenderingContentComponent, DeferredRenderingDemoModalComponent } from './deferred-rendering-demo.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ModalDemoComponent,
     NestedModalDemoComponent,
     PanelDemoComponent,
-    TabsModalComponent
+    TabsModalComponent,
+    DeferredRenderingDemoModalComponent,
+    DeferredRenderingContentComponent
   ],
   imports: [
     BrowserAnimationsModule,
