@@ -1,31 +1,47 @@
 import {
-  Component, ElementRef, ViewChild, Input, Output, AfterViewChecked, HostListener, EventEmitter, ViewEncapsulation
+  Component, ElementRef, ViewChild, Input, Output, AfterViewChecked, HostListener, EventEmitter, ViewEncapsulation, ContentChild, TemplateRef, forwardRef, InjectionToken
 } from '@angular/core';
 import {ResizableEvent} from '../resizable/types';
 import {maxZIndex, findAncestor} from '../common/utils';
+
+export const HOST_MODAL = new InjectionToken<ModalComponent>('HOST_MODAL');
 
 @Component({
   selector: 'app-modal',
   templateUrl: 'modal.component.html',
   styleUrls: ['modal.component.css'],
   encapsulation: ViewEncapsulation.None,
+  providers: [{
+    provide: HOST_MODAL,
+    useExisting: forwardRef(() => ModalComponent),
+    multi: true
+}]
 })
 export class ModalComponent implements AfterViewChecked {
 
   @Input() scrollTopEnable = true;
+  @Input() resizeable = true;
   @Input() maximizable: boolean;
   @Input() backdrop = true;
   @Input() inViewport: boolean;
-
+  @Input() dontDestroyOnClose = true;
+  @Input() minHeight = 0;
+  @Input() setFocus = true;
+  @Output() openModal: EventEmitter<boolean> = new EventEmitter();
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter();
-
   @ViewChild('modalRoot', {static: false}) modalRoot: ElementRef;
   @ViewChild('modalBody', {static: false}) modalBody: ElementRef;
   @ViewChild('modalHeader', {static: false}) modalHeader: ElementRef;
   @ViewChild('modalFooter', {static: false}) modalFooter: ElementRef;
   @ViewChild('closeIcon', {static: false}) closeIcon: ElementRef;
-
+  @ViewChild('overlay', {static: false}) overlay: ElementRef;
+  @ContentChild('appModalBody', { descendants: true, static: true }) bodyTemplateRef: TemplateRef<any>;
+  @ContentChild('appModalHeader', { descendants: true, static: true }) headerTemplateRef: TemplateRef<any>;
+  @ContentChild('appModalFooter', { descendants: true, static: true }) footerTemplateRef: TemplateRef<any>;
+  
+  clearable = false;
   visible: boolean;
+  rendered: boolean;
   executePostDisplayActions: boolean;
   maximized: boolean;
   preMaximizeRootWidth: number;
@@ -35,7 +51,8 @@ export class ModalComponent implements AfterViewChecked {
   preMaximizePageY: number;
   dragEventTarget: MouseEvent | TouchEvent;
 
-  constructor(private element: ElementRef) {}
+  constructor(private element: ElementRef) {
+  }
 
   ngAfterViewChecked(): void {
     if (this.executePostDisplayActions) {
@@ -57,18 +74,26 @@ export class ModalComponent implements AfterViewChecked {
     this.center();
   }
 
-  show(): void {
+  render() {
     this.executePostDisplayActions = true;
-    this.visible = true;
+    this.rendered = true;
     setTimeout(() => {
-      this.modalRoot.nativeElement.focus();
+      if(this.setFocus) {
+        this.modalRoot.nativeElement.focus();
+      }
       if (this.scrollTopEnable) {
         this.modalBody.nativeElement.scrollTop = 0;
       }
+      this.openModal.next(true);
     }, 1);
+  }
+  show(): void {
+    this.render();
+    this.visible = true;
   }
 
   hide(): void {
+    this.rendered = false;
     this.visible = false;
     this.closeModal.emit(true);
     this.focusLastModal();
@@ -80,7 +105,7 @@ export class ModalComponent implements AfterViewChecked {
 
     if (elementWidth === 0 && elementHeight === 0) {
       this.modalRoot.nativeElement.style.visibility = 'hidden';
-      this.modalRoot.nativeElement.style.display = 'block';
+      this.modalRoot.nativeElement.style.display = 'flex';
       elementWidth = this.modalRoot.nativeElement.offsetWidth;
       elementHeight = this.modalRoot.nativeElement.offsetHeight;
       this.modalRoot.nativeElement.style.display = 'none';
@@ -136,6 +161,15 @@ export class ModalComponent implements AfterViewChecked {
     event.preventDefault();
   }
 
+  resizeToContentHeight() {
+    const bodyChildren = this.modalBody.nativeElement.children;
+    const bodyRect = this.modalBody.nativeElement.getBoundingClientRect();
+    if(!bodyChildren || bodyChildren.length == 0)
+      return;
+    const height = Math.max(...[...bodyChildren].map(x => x.getBoundingClientRect()).map(x => x.top + x.height - bodyRect.top));
+    this.modalBody.nativeElement.style.height = height + 16 + 'px';
+    this.modalBody.nativeElement.style.maxHeight = 'none';
+  }
   maximize(): void {
     this.preMaximizePageX = parseFloat(this.modalRoot.nativeElement.style.top);
     this.preMaximizePageY = parseFloat(this.modalRoot.nativeElement.style.left);
@@ -165,14 +199,16 @@ export class ModalComponent implements AfterViewChecked {
   }
 
   moveOnTop(): void {
-    if (!this.backdrop) {
       const maxModalIndex = this.getMaxModalIndex();
       let zIndex = parseFloat(window.getComputedStyle(this.modalRoot.nativeElement).zIndex) || 0;
       if (zIndex <= maxModalIndex) {
         zIndex = maxModalIndex + 1;
-        this.modalRoot.nativeElement.style.zIndex = zIndex.toString();
+        this.overlay.nativeElement.style.zIndex = zIndex.toString();
+        this.modalRoot.nativeElement.style.zIndex = (zIndex + 1).toString();
       }
-    }
   }
 
+  setVisible(visible: boolean = true) {
+    this.visible = visible;
+  }
 }

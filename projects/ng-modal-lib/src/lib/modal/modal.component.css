@@ -21,6 +21,7 @@
 .ui-modal {
   display: none;
   position: fixed;
+  flex-flow: column nowrap;
   left: 0;
   top: 0;
   outline: none;
@@ -30,6 +31,13 @@
   min-width: 16.25rem;
   min-height: 12.5rem;
   width: 31.25rem;
+  animation: fadeIn 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .ui-modal-header {
@@ -45,6 +53,7 @@
 }
 
 .ui-modal-body {
+  flex-grow: 1;
   position: relative;
   padding: .625rem 1rem;
   max-height: calc(100vh - 12.5rem);
